@@ -1,1 +1,1 @@
-This is a project that was downloaded from my student Github account since the project is private and we cannot change that. 
+This is a project that was downloaded from my student Github account since the project is private and we cannot change that. The aim of the project was to use public road traffic camera APIs to create a map in which you could see the current camera feed by clicking on the spot on a map. I am very happy with the UI of this porject and all the goals were met in my opinion.
