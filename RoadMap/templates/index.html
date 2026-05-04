@@ -1,0 +1,286 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="{% static 'loadweather.js' %}"></script>
+  <script src="{% static 'login.js' %}"></script>
+  <script src="{% static 'loadannouncements.js' %}"></script>
+  <script src="{% static 'toggleMapLayer.js' %}"></script>
+  <script src="{% static 'loadTrainStations.js' %}"></script>
+  <script src="{% static 'loadRoadWorks.js' %}"></script>
+  <script src="{% static 'loadTrainLocations.js' %}"></script>
+  <script src="{% static 'initBurgerMenu.js' %}"></script>
+  <script src="{% static 'loadExemptedTransport.js' %}"></script>
+  <script src="{% static 'loadWeightRestrictions.js' %}"></script>
+  <script src="{% static 'searchHistory.js' %}"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.1.1/css/leaflet-sidebar.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.82.0/dist/L.Control.Locate.min.css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/index.css' %}">
+  </link>
+  <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+  </link>
+  <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+  </link>
+  <link rel="stylesheet" type="text/css" href="{% static 'easy-button.css' %}">
+  </link>
+  <link rel="stylesheet" type="text/css" href="{% static 'burger.css' %}">
+  </link>
+  <link rel="stylesheet" type="text/css" href="{% static 'popup.css' %}">
+  </link>
+</head>
+<body>
+  <div class="centered-container">
+    <h2>Toggle Road | Train</h2>
+    <label class="switch">
+      <input type="checkbox" id="toggleMap" onchange="toggleMapLayer()">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div id="map" class="map" style="position:relative; width: 100%; height: 80vh;"></div>
+  <div id="popupoverlay" class="popupoverlay hidden">
+    <p id="popuptext">Sample Text</p>
+  </div>
+  <div id="overlay" class="overlay hidden">
+    <form class="loginform" id="loginform" onsubmit="return false">
+      <label class="loginlabel" for="Uname">Username:</label>
+      {% csrf_token %}
+      <br>
+      <input class="logininput" type="text" id="Uname" name="Uname">
+      <br>
+      <label class="loginlabel" for="Psw">Password:</label>
+      <br>
+      <input class="logininput" type="password" id="Psw" name="Psw">
+      <br>
+      <div class="loginbuttons"><button type="submit" form="loginform" value="Submit" onclick="loginbutton()"
+          class="login">Login</button><button onclick="register()" class="cancel">Register?</button></div>
+    </form>
+    <form class="registerform hidden" id="registerform" onsubmit="return false">
+      <label class="loginlabel" for="Uname">Username:</label>
+      {% csrf_token %}
+      <br>
+      <input class="logininput" type="text" id="Uname" name="Uname">
+      <br>
+      <label class="loginlabel" for="Email">Email:</label>
+      <br>
+      <input class="logininput" type="text" id="Email" name="Email">
+      <br>
+      <label class="loginlabel" for="Psw">Password:</label>
+      <br>
+      <input class="logininput" type="password" id="Psw" name="Psw">
+      <br>
+      <label class="loginlabel" for="Psw2">Password:</label>
+      <br>
+      <input class="logininput" type="password" id="Psw2" name="Psw2">
+      <br>
+      <div class="loginbuttons"><button type="submit" form="loginform" value="Submit" onclick="registerbutton()"
+          class="login">Register</button><button onclick="register()" class="cancel">Login?</button></div>
+    </form>
+    <div class="login_close" onclick="closeelement()">X</div>
+  </div>
+
+  <div id="searchHistoryModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeSearchHistoryModal()">&times;</span>
+      <h2>Search History</h2>
+      <div id="search-history">
+      </div>
+    </div>
+    <div id="map" class="map" style="position:relative; width: 100%; height: 80vh;"></div>
+    <div id="popupoverlay" class="popupoverlay hidden">
+      <p id="popuptext">Sample Text</p>
+    </div>
+    <div id="overlay" class="overlay hidden">
+        <form class="loginform" id="loginform" onsubmit="return false">
+          <label class="loginlabel" for="Uname">Username:</label>
+          {% csrf_token %}
+          <br>
+          <input class="logininput" type="text" id="Uname" name="Uname">
+          <br>
+          <label class="loginlabel" for="Psw">Password:</label>
+          <br>
+          <input class="logininput" type="password" id="Psw" name="Psw">
+          <br>
+          <div class="loginbuttons"><button type="submit" form="loginform" value="Submit" class="loginformbutton" onclick="loginbutton()">Login</button><button class="loginformbutton" onclick="register()" >Register?</button></div>
+        </form>
+        <form class="registerform hidden" id="registerform" onsubmit="return false">
+          <label class="loginlabel" for="Uname">Username:</label>
+          {% csrf_token %}
+          <br>
+          <input class="logininput" type="text" id="Uname" name="Uname">
+          <br>
+          <label class="loginlabel" for="Email">Email:</label>
+          <br>
+          <input class="logininput" type="text" id="Email" name="Email">
+          <br>
+          <label class="loginlabel" for="Psw">Password:</label>
+          <br>
+          <input class="logininput" type="password" id="Psw" name="Psw">
+          <br>
+          <label class="loginlabel" for="Psw2">Password:</label>
+          <br>
+          <input class="logininput" type="password" id="Psw2" name="Psw2">
+          <br>
+          <div class="loginbuttons"><button type="submit" form="loginform" class="loginformbutton" value="Submit" onclick="registerbutton()">Register</button><button class="loginformbutton" onclick="register()">Login?</button></div>
+        </form>
+        <div class="login_close" onclick="closeelement()">X</div>
+    </div>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.82.0/dist/L.Control.Locate.min.js"
+    charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.1.1/js/leaflet-sidebar.min.js"></script>
+  <script src="{% static 'easy-button.js' %}"></script>
+  <script src="{% static 'burger.js' %}"></script>
+  <script id="hello-data" type="application/json">{{ ListOfImages }}</script>
+  <script id="traffic-data" type="application/json">{{ TrafficMessages }}</script>
+  <script id="train-station-data" type="application/json">{{ TrainStations }}</script>
+  <script id="road-work-data" type="application/json">{{ RoadWorks }}</script>
+  <script id="train-location-data" type="application/json">{{ TrainLocations }}</script>
+  <script id="weight-restriction-data" type="application/json">{{ WeightRestrictions }}</script>
+  <script id="exempted-transport-data" type="application/json">{{ ExemptedTransports }}</script>
+  <script id="train-routes-data" type="application/json">{{ TrainRoutes }}</script>
+
+  <script>
+    var map = L.map('map', { center: [61.9241, 25.748], zoomControl: false }).setView([61.9241, 25.748], 7);
+
+    var roadLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 200,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    var trainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    var satelliteLayer = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+      maxZoom: 19
+    });
+
+    var baseMaps = {
+      "Road": roadLayer,
+      "Train": trainLayer,
+      "Satellite": satelliteLayer,
+    };
+
+    var routingControl = L.Routing.control({
+      waypoints: [],
+      routeWhileDragging: true,
+      geocoder: L.Control.Geocoder.nominatim(),
+      createMarker: function (i, waypoint, n) {
+        if (i === 0) {
+          return L.marker(waypoint.latLng, {
+            draggable: true
+          })
+        } else if (i === n - 1) {
+          return L.marker(waypoint.latLng, {
+            draggable: true
+          })
+        }
+        return null;
+      }
+    }).addTo(map);
+
+    routingControl.on('geocoded', function (e) {
+      const waypoints = routingControl.getWaypoints();
+
+      if (!waypoints[0].latLng) {
+        routingControl.spliceWaypoints(0, 1, e.geocode.center);
+      } else if (!waypoints[1].latLng) {
+        routingControl.spliceWaypoints(1, 1, e.geocode.center);
+      } else {
+        routingControl.spliceWaypoints(waypoints.length, 0, e.geocode.center);
+      }
+    });
+
+
+    function clearVias() {
+      const waypoints = routingControl.getWaypoints();
+      if (waypoints.length > 2) {
+        routingControl.setWaypoints([waypoints[0], waypoints[waypoints.length - 1]]);
+      }
+    }
+
+    var clearViasControl = L.Control.extend({
+      options: { position: 'topright' },
+
+      onAdd: function () {
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        var button = L.DomUtil.create('a', '', container);
+
+        button.innerHTML = '-';
+
+        L.DomEvent.on(button, 'click', function (e) {
+          L.DomEvent.stopPropagation(e);
+          L.DomEvent.preventDefault(e);
+          clearVias();
+        });
+
+        return container;
+      }
+    });
+
+    map.addControl(new clearViasControl());
+    L.easyButton('<span class="equiv">&equiv;;</span>', function () {
+      console.log("");
+    });
+
+    L.Control.geocoder({ defaultMarkGeocode: true })
+      .on('markgeocode', async (e) => {
+        const query = e.geocode.name || e.geocode.label || e.geocode.formatted || 'No valid geocode data';
+
+        try {
+          const isLoggedIn = await checkauthentication();
+          if (isLoggedIn) {
+            await saveSearchQuery(query);
+          } else {
+            console.log("User is not logged in. Search history will not be saved.");
+          }
+        } catch (error) {
+          console.error("Error processing search:", error);
+        }
+      })
+      .addTo(map);
+
+    initBurgerMenu()
+
+    var burgermenu = L.easyButton({
+      states: [{
+        stateName: 'show',
+        icon: '<img class="burgerimg" src="{% static "images/menu.png" %}"/>',
+        title: 'Show Menu',
+        onClick: function (btn, map) {
+          btn.state('hide');
+          burger._show()
+        }
+      }, {
+        stateName: 'hide',
+        icon: '<img class="burgerimg" src="{% static "images/menu.png" %}"/>',
+        title: 'Hide Menu',
+        onClick: function (btn, map) {
+          btn.state('show');
+          burger._hide()
+        }
+      }],
+    });
+    burgermenu.addTo(map);
+
+    L.control.layers(baseMaps).addTo(map);
+    L.control.locate().addTo(map);
+
+  </script>
+
+
+</body>
+
+</html>

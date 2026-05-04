@@ -1,0 +1,57 @@
+
+@keyframes small {
+    0%  {width:500px }
+    20% {width:460px}
+    40% {width:420px }
+    60% {width:380px }
+    80% {width:340px }
+    100% {width:300px }
+}
+
+@keyframes big {
+    100%  {width:500px }
+    80% {width:460px}
+    60% {width:420px }
+    40% {width:380px }
+    20% {width:340px }
+    0% {width:300px }
+}
+
+.menubutton {
+    width: 20px; 
+    height: 20px;
+    position:absolute;
+}
+
+.popupimage{
+    width: 300px;
+}
+.leaflet-popup-content-wrapper{
+    flex: 1;
+    display: inline-block;
+}
+.leaflet-popup-content{
+    flex: 1;
+    display: inline-block;
+    width: auto;
+}
+.weatherdiv{
+    display: inline-block;
+}
+.popupa {
+    width: 300px;
+    height: 200px;
+}
+.popupimage{
+    transition: transform 0.2s;
+}
+.popupimage.small {
+    animation-name: small;
+    animation-duration: 0.2s;
+    animation-iteration-count: 1;
+}
+.popupimage.big {
+    animation-name: big;
+    animation-duration: 0.2s;
+    animation-iteration-count: 1;
+}
