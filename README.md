@@ -8,5 +8,5 @@ Django Travel Planning Map on projekti jonka rakensimme neljän henkilön Scrum-
 
 Verkkosivun tarkoitus on toimia matkan suunnittelu sovelluksena. Päänäkymässä on kartta josta käyttäjä voi valita Digitrafic API:n kautta saatuja kameroita joilla he voivat tutkia sää/ruuhka olosuhteita. On myös mahdollista saada reitin matka asettamalla matkan aloitus ja lopetus piste.
 
-
-
+## <span style="color:#757575">Youtube Esittely</span>
+[Esittely Video](https://youtu.be/5nMD2DAkRSs).
