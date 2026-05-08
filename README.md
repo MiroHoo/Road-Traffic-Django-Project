@@ -16,17 +16,21 @@ The purpose of the website is to serve as a travel planning application. The mai
 
 *Image 2. Image of the camera feed*
 
-![](/ReadMeProject/UI.png)
+![](/ReadMeProject/Planner.png)
 
 *Image 3. Image of UI*
 
+![](/ReadMeProject/UI.png)
+
+*Image 4. Image of UI*
+
 ![](/ReadMeProject/View.png)
 
-*Image 4. Image of Details*
+*Image 5. Image of Details*
 
 ![](/ReadMeProject/Juna.png)
 
-*Image 4. Image of Train Map*
+*Image 6. Image of Train Map*
 
 ## <span style="color:#757575">Youtube Preview In Finnish</span>
 [Esittely Video](https://youtu.be/5nMD2DAkRSs).
