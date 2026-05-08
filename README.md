@@ -8,5 +8,5 @@ Django Travel Planning Map is a project that we built in a four-person Scrum tea
 
 The purpose of the website is to serve as a travel planning application. The main view features a map where users can select traffic cameras provided through the Digitraffic API to examine weather and traffic conditions. It is also possible to get route directions by setting a starting point and destination for the trip.
 
-## <span style="color:#757575">Youtube Esittely</span>
+## <span style="color:#757575">Youtube Preview In Finnish</span>
 [Esittely Video](https://youtu.be/5nMD2DAkRSs).
