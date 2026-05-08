@@ -2,7 +2,7 @@
 
 ## <span style="color:#757575">Introduction</span>
 
-Django Travel Planning Map is a project that we built in a four-person Scrum team. Unfortunately, the commit history is tied to my student account, but the main functionalities can be seen here.
+Django Travel Planning Map is a project that we built in a four-person Scrum team. Unfortunately, the commit history is tied to my student account, but the main functionalities can be seen here. This was a project built in just about a month while learning new technologies and having to do course work.
 
 ## <span style="color:#757575">Purpose of Use</span>
 
