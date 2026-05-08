@@ -18,7 +18,7 @@ The purpose of the website is to serve as a travel planning application. The mai
 
 ![](/ReadMeProject/Planner.png)
 
-*Image 3. Image of UI*
+*Image 3. Image of Map Planner*
 
 ![](/ReadMeProject/UI.png)
 
