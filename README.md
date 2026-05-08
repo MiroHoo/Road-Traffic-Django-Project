@@ -1,12 +1,12 @@
 # <span style="color:#757575">Django Travel Planning Map</span>
 
-## <span style="color:#757575">Esittely</span>
+## <span style="color:#757575">Introduction</span>
 
-Django Travel Planning Map on projekti jonka rakensimme neljän henkilön Scrum-tiimissä. Harmillisesti commit historia on jumissa opiskelija tililläni, mutta tässä näkyy päätoiminnallisuudet.
+Django Travel Planning Map is a project that we built in a four-person Scrum team. Unfortunately, the commit history is tied to my student account, but the main functionalities can be seen here.
 
-## <span style="color:#757575">Käyttötarkoitus</span>
+## <span style="color:#757575">Purpose of Use</span>
 
-Verkkosivun tarkoitus on toimia matkan suunnittelu sovelluksena. Päänäkymässä on kartta josta käyttäjä voi valita Digitrafic API:n kautta saatuja kameroita joilla he voivat tutkia sää/ruuhka olosuhteita. On myös mahdollista saada reitin matka asettamalla matkan aloitus ja lopetus piste.
+The purpose of the website is to serve as a travel planning application. The main view features a map where users can select traffic cameras provided through the Digitraffic API to examine weather and traffic conditions. It is also possible to get route directions by setting a starting point and destination for the trip.
 
 ## <span style="color:#757575">Youtube Esittely</span>
 [Esittely Video](https://youtu.be/5nMD2DAkRSs).
