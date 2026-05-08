@@ -12,7 +12,7 @@ The purpose of the website is to serve as a travel planning application. The mai
 
 *Image 1. Image of the initial plans*
 
-![](/ReadMeProject/Road_Traffic_Image.png)
+![](/ReadMeProject/RoadTrafficImage.png)
 
 *Image 2. Image of the camera feed plans*
 
